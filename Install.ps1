@@ -86,14 +86,12 @@ if(! $SetupOnly ) {
 
     Write-Information 'Downloading latest release asset from GitHub'
     $ReleaseData = Invoke-RestMethod -Uri https://api.github.com/repos/cwgem/pypy-powershell-install/releases/latest
-    $ReleaseUrl = $ReleaseData | Where-Object -FilterScript { $_.name -EQ "PyPyInstaller-${ReleaseData.tag_name}.zip" } | Select-Object -ExpandProperty browser_download_url
-    Invoke-WebRequest -Uri $ReleaseUrl | Select-Object -ExpandProperty Content | Out-File "$env:temp\PyPyInstaller.zip"
+    $ReleaseUrl = $ReleaseData.assets | Where-Object -FilterScript { $_.name -EQ "PyPyInstaller-$( $ReleaseData.tag_name ).zip" } | Select-Object -ExpandProperty browser_download_url
+    Invoke-WebRequest -Uri $ReleaseUrl -OutFile "$env:temp\PyPyInstaller.zip"
 
     New-Item -ItemType Directory -Force $script:MyDocumentsModulesPath
-    Expand-Archive -LiteralPath "$env:temp\PyPyInstaller.zip" -DestinationPath "${script:MyDocumentsModulesPath}"
+    Expand-Archive -LiteralPath "$env:temp\PyPyInstaller.zip" -DestinationPath "${script:MyDocumentsModulesPath}" -Force
 }
-
-New-Item -ItemType Directory -Force $RootPath
 
 if( $UpdateMirrorList ) {
     Invoke-WebRequest -Uri https://buildbot.pypy.org/mirror/versions.json | Select-Object -ExpandProperty Content | Out-File "${RootPath}\versions.json"

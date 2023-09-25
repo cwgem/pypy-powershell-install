@@ -21,10 +21,10 @@ jobs:
       - name: Create Release
         uses: taiki-e/create-gh-release-action@v1
         with:
+          INPUT_CHANGELOG: CHANGELOG.md
           token: ${{ secrets.RELEASE_SECRET }}
       - name: Upload Release Assets
         env:
-          INPUT_CHANGELOG: CHANGELOG.md
           GITHUB_TOKEN: ${{ secrets.RELEASE_SECRET }}
         run:
           gh release upload ${{ github.ref_name }} PyPyInstaller-${{ github.ref_name }}.zip
