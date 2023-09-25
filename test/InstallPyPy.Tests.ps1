@@ -1,4 +1,5 @@
 $PackageRoot = "$PSScriptRoot\..\src\PyPyInstaller\"
+Remove-Module PyPyInstaller
 Import-Module $PackageRoot -Force
 . "$PackageRoot\Functions\Private\Utility.ps1"
 . "$PackageRoot\Functions\Private\Get-PyPyDownloadAndExtract.ps1"

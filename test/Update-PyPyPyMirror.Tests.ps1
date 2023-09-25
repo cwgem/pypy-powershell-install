@@ -1,6 +1,7 @@
 BeforeAll {
     $PackageRoot = "$PSScriptRoot\..\src\PyPyInstaller\"
-    Import-Module $PackageRoot
+    Remove-Module PyPyInstaller
+    Import-Module $PackageRoot -Force
     . "$PackageRoot\Functions\Private\Utility.ps1"
 }
 InModuleScope PyPyInstaller {
