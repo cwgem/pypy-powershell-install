@@ -1,0 +1,12 @@
+{
+    "3.7.9": {
+        "pypy_version": "7.3.3",
+        "python_version": "3.7.9",
+        "install_path": "C:\\Installs\\7.3.3-3.7.9"
+    },
+    "3.9.16": {
+        "pypy_version": "7.3.11",
+        "python_version": "3.9.16",
+        "install_path": "C:\\Installs\\7.3.11-3.9.16"
+    }
+}
