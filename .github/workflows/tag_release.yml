@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Zip Module Files
         run:
-          zip -r -q PyPyInstaller-${{ github.ref_name }}.zip PyPyInstaller
+          zip -r -q PyPyInstaller-${{ github.ref_name }}.zip src/PyPyInstaller
       - name: Create Release
         uses: taiki-e/create-gh-release-action@v1
         with:
