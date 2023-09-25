@@ -1,6 +1,6 @@
 # PyPyInstaller
 
-Powershell module to manage PyPy on Windows. This project was created with the goal in mind of providing an easy way to install PyPy versions, as well as make them available in $PATH and through the [Python Launcher](https://docs.python.org/3/using/windows.html#python-launcher-for-windows)]. Functionality of this module exists through individual functions with different options. The mirror list for PyPy versions is downloaded into a cache directory to reduce server hits, and PyPy files will not be downloaded if they already exist in the downloads folder.
+Powershell module to manage PyPy on Windows. This project was created with the goal in mind of providing an easy way to install PyPy versions, as well as make them available in $PATH and through the [Python Launcher](https://docs.python.org/3/using/windows.html#python-launcher-for-windows). Functionality of this module exists through individual functions with different options. The mirror list for PyPy versions is downloaded into a cache directory to reduce server hits, and PyPy files will not be downloaded if they already exist in the downloads folder.
 
 Please note that the current codebase has unsigned code. As such the resulting installation method will require security policy bypass to run. The only other way around this would be to purchase a code signing certificate, but those are quite expensive for a project that I'm not sure of the adoption of.
 
