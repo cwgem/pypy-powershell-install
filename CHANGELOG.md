@@ -1,3 +1,8 @@
+## v0.0.5
+
+- Fix: release action had the wrong variable for changelog
+- Feature: Major README.md update with installation and usage instructions
+
 ## v0.0.4
 
 - Fix: Install script creating duplicate paths
