@@ -22,21 +22,32 @@ function Find-PyPyLatest {
     )
 
     begin {
-        . $PSScriptRoot\..\Private\Utility.ps1
+        . "$PSScriptRoot\..\Private\Utility.ps1"
         $PyPyInstallerConfig = Read-PyPyInstallerConfig
         $PyPyVersionInfo = Get-Content -Path "$( $PyPyInstallerConfig.RootPath )\versions.json" ` | ConvertFrom-Json
+
     }
 
     process {
         if( ! $PythonSeries )
         {
-            $PyPyVersions = $PyPyVersionInfo  `
-            | Where-Object -FilterScript { $_.latest_pypy -eq $true } `
-            | Add-Member -Force -MemberType ScriptMethod -Name 'parsed_version' -Value { [version]$_.python_version } -PassThru `
-            | Sort-Object -Property parsed_version -Descending
-            | Select-Object -First 1
+            $LatestPyPyVersion
 
-            $VersionReturn = $PyPyVersions
+            foreach ( $PyPyVersion in $PyPyVersionInfo ) {
+                if ( -not $PyPyVersion.pypy_version -match "[0-9]+\.[0-9]+\.[0-9]+$" ) {
+                    Continue
+                }
+                if ( -not $LatestPyPyVersion ) {
+                    $LatestPyPyVersion = $PyPyVersion
+                }
+                else {
+                    if ( ( Compare-PyPyVersion -PossibleCurrentVersion $PyPyVersion.python_version -CurrentVersion $LatestPyPyVersion.python_version ) ) {
+                        $LatestPyPyVersion = $PyPyVersion
+                    }
+                }
+            }
+
+            $VersionReturn = $LatestPyPyVersion
         }
         else {
             $VersionComparison = @{}
@@ -54,7 +65,9 @@ function Find-PyPyLatest {
             }
             $VersionReturn = $VersionComparison.Values
         }
+    }
 
+    end {
         return $VersionReturn
     }
 }

@@ -17,14 +17,10 @@ InModuleScope PyPyInstaller {
                 Assert-MockCalled Get-Content -Exactly -Times 1 -Scope It
                 $PyPyVersionInfo.python_version | Should -Be "3.10.12"
             }
-
-            It "Passes Returns A Hashtable" {
-                Find-PyPyLatest | Should -BeOfType System.Object
-            }
         }
 
         Context "Python Series Defined" {
-            It "Passes Returns A Hash Table" {
+            It "Passes Returns A System Object" {
                 Find-PyPyLatest -PythonSeries "3.6" | Should -BeOfType System.Object
             }
 

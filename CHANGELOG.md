@@ -1,3 +1,12 @@
+## v0.0.6
+
+- Refactor `Find-PyPyLatest` tests for 100% code coverage
+- Remove redundant test
+- Make CI use `GITHUB_TOKEN` and scope down permissions to job level
+- Refactor test runner to return test results for validation
+  as well as changing the default output so code coverage issues
+  are shown in an easy to diagnose format
+
 ## v0.0.5
 
 - Fix: release action had the wrong variable for changelog

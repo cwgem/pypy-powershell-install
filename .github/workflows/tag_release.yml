@@ -1,8 +1,5 @@
 name: Release
 
-permissions:
-  contents: write
-
 on:
   push:
     tags:
@@ -11,6 +8,8 @@ on:
 jobs:
   create-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Zip Module Files
@@ -22,9 +21,9 @@ jobs:
         uses: taiki-e/create-gh-release-action@v1
         with:
           changelog: CHANGELOG.md
-          token: ${{ secrets.RELEASE_SECRET }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Assets
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run:
           gh release upload ${{ github.ref_name }} PyPyInstaller-${{ github.ref_name }}.zip
